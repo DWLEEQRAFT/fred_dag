@@ -44,7 +44,7 @@ def get_dff(date_from='1986-12-31', date_to='9999-12-31', frequency='M'):
     Source: Board of Governors of the Federal Reserve System (US)
     Release: H.15 Selected Interest Rates
     Release Frequency: Daily
-    Via Archival FRED(https://alfred.stlouisfed.org/)
+    Via Archival FRED(https://alfred.stlouisfed.org/)4
     """
     formatted_warnings.warn('[FredAPI] FRED API 로 변경되었음')
     req_date_from = date_from
@@ -268,7 +268,7 @@ def get_cpi(date_from='1986-12-31', date_to='9999-12-31', frequency='M'):
     """
     req_date_from = date_from
 
-    data = Fred.get_time_series_data('CPIAUCSL', date_from, date_to, frequency, convert_to_rate,
+    data = Fred.get_time_series_data('CPIAUCSL', date_from, date_to, frequency,
                                      reliable_start='1989-01-01')
 
     data = fit_data_to_date_range(data, req_date_from)
@@ -295,7 +295,7 @@ def get_us_m2_velocity(date_from='1986-12-31', date_to='9999-12-31', frequency='
     Via Archival FRED(https://alfred.stlouisfed.org/)
     """
     req_date_from = date_from
-    data = Fred.get_time_series_data('M2V', date_from, date_to, frequency, convert_to_rate)
+    data = Fred.get_time_series_data('M2V', date_from, date_to, frequency)
 
     data = fit_data_to_date_range(data, req_date_from)
 

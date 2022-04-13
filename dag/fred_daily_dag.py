@@ -43,6 +43,7 @@ with DAG(
     task_process = []
     ticker_list = []
 
+    #sample Task
     t1 = BashOperator(task_id='print_date',
                       bash_command='date',
                       dag=dag)
