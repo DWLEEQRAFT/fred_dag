@@ -20,6 +20,7 @@ def pass_args(target):
     @functools.wraps(target)
     def wrapper(*args, **kwargs):
         return target(*args, **kwargs)
+
     return wrapper
 
 
@@ -50,7 +51,6 @@ def change_values(df, change_to, shifting=1):
     elif change_to == 'rate':
         return df / df.shift(shifting) - 1.
     return df
-
 
 
 def daily_to_monthly(df):

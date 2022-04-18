@@ -6,5 +6,6 @@ RUN pip install google.cloud
 RUN pip install pandas
 RUN pip install fredapi
 RUN pip install google-cloud-bigquery
+RUN pip install db-dtypes
 ENV GIT_PYTHON_REFRESH=quiet
 ENV TZ=Asia/Seoul%

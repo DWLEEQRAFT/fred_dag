@@ -1,16 +1,15 @@
 from airflow.operators.bash import BashOperator
-from fredapi import Fred ## 어떤 api 를 사용할 것인가
-#from fred_api import get_time_series_data
+from fredapi import Fred  ## 어떤 api 를 사용할 것인가
 from airflow.providers.docker.operators.docker import DockerOperator
 from airflow.operators.python import PythonOperator
 from airflow import DAG
 import pendulum
 from datetime import timedelta, datetime
 
-__TASK__ = "daily_micro_etl"
+__TASK__ = "daily_fred_dag"
 
 KST = pendulum.timezone("Asia/Seoul")
-image = "micro_etl"  # qlcnal0211/micro_etl:
+image = "qraftaxe/fred_dag"  # qraftaxe/fred_dag
 
 default_args = {
     'owner': 'airflow',
@@ -19,14 +18,12 @@ default_args = {
     # "on_failure_callback": send_message
 }
 
-
-
 with DAG(
         dag_id=__TASK__,
         default_args=default_args,
         description=__TASK__,
         schedule_interval="@daily",
-        start_date=datetime(2022, 1, 27, tzinfo=KST),
+        start_date=datetime(2022, 4, 13, tzinfo=KST),
         tags=[__TASK__],
 ) as dag:
     run_batch = DockerOperator(
@@ -43,28 +40,9 @@ with DAG(
     task_process = []
     ticker_list = []
 
-    #sample Task
+    # Sample task
     t1 = BashOperator(task_id='print_date',
                       bash_command='date',
                       dag=dag)
 
-    t2 = BashOperator(task_id='sleep',
-                      bash_command='sleep 3',
-                      dag=dag)
-
-    t3 = BashOperator(task_id='print_whoami',
-                      bash_command='whoami',
-                      dag=dag)
-
-
-
-    t1 >> t2 >> t3
-
-
-
-
-
-
-
-
-
+    t1 >> run_batch
