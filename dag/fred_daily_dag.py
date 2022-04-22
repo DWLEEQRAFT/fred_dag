@@ -37,7 +37,7 @@ with DAG(
         network_mode="bridge"
     )
 
-    task_process = []
+
     ticker_list = []
 
     # Sample task
