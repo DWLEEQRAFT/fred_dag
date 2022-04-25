@@ -25,75 +25,75 @@ sql = f"""
 
 df_tickers = client.query(sql).to_dataframe()
 tickers = df_tickers['ticker'].values.tolist()
-print(tickers)
 
-tickers = ['CPILFESL',  # Price Level
-           'DPCCRC1M027SBEA',
-           'WPSFD4131',  # No [notes] data in fred series info
-           'CPIAUCSL',
-           'PCE',
-           'WPSFD49207',  # No [notes] data in fred series info
-           'PCETRIM12M159SFRBDAL',
-           'WRMFSL',  # Money Flow
-           'WIMFSL',
-           'M1',
-           'M2',
-           'MZM',
-           'M1V',
-           'M2V',
-           'MZMV',
-           'XTEXVA01USM659S',  # Trade
-           'XTIMVA01USM659S',
-           'GGSAVE',  # Saving / Investment / Tax / Government
-           'GPSAVE',
-           'PSAVERT',
-           'A822RO1Q156NBEA',
-           'B006RO1Q156NBEA',
-           'W006RC1Q027SBEA',
-           'GFDEGDQ188S',
-           'A191RO1Q156NBEA',
-           'A001RO1Q156NBEA',  # Total Perspective
-           'CP',
-           'INDPRO',
-           'CSUSHPISA',
-           'TCU',
-           'GDPC1',
-           'UNRATE',  # Misc
-           #'VIXCLS'  # VINTAGE DATES OUT OF MAXIMUM ERROR
-           'WILL5000PR',
-           'DFF',  # Maturity / Rate  # VINTAGE DATES OUT OF MAXIMUM ERROR
-           'DGS1',
-           'DGS2',
-           'DGS3',
-           'DGS5',
-           'DGS7',
-           'DGS10',
-           'DGS20',
-           'DGS30',
-           'DAAA',
-           'DBAA',
-           # libor 금리, 조회되지 않음
-           # 'USD1MTD156N',
-           # 'USD3MTD156N',
-           # 'USD6MTD156N',
-           # 'USD12MTD156N',
-           # 고시 종료
-           # 'TEDRATE',  # Spread
-           # 'T3MFF',  # VINTAGE DATES OUT OF MAXIMUM ERROR
-           # 'T6MFF',  # VINTAGE DATES OUT OF MAXIMUM ERROR
-           # 'T1YFF',  # VINTAGE DATES OUT OF MAXIMUM ERROR
-           # 'T5YFF',  # VINTAGE DATES OUT OF MAXIMUM ERROR
-           # 'T10YFF',  # VINTAGE DATES OUT OF MAXIMUM ERROR
-           # 'T10Y2Y',  # VINTAGE DATES OUT OF MAXIMUM ERROR
-           # 'T10Y3M',  # VINTAGE DATES OUT OF MAXIMUM ERROR
-           'AAAFF',
-           'AAA10Y',
-           'BAAFF',
-           'BAA10Y',
-           'BAMLH0A0HYM2'  # VINTAGE DATES OUT OF MAXIMUM ERROR
-           ]
+# tickers = ['CPILFESL',  # Price Level
+#            'DPCCRC1M027SBEA',
+#            'WPSFD4131',  # No [notes] data in fred series info
+#            'CPIAUCSL',
+#            'PCE',
+#            'WPSFD49207',  # No [notes] data in fred series info
+#            'PCETRIM12M159SFRBDAL',
+#            'WRMFSL',  # Money Flow
+#            'WIMFSL',
+#            'M1',
+#            'M2',
+#            'MZM',
+#            'M1V',
+#            'M2V',
+#            'MZMV',
+#            'XTEXVA01USM659S',  # Trade
+#            'XTIMVA01USM659S',
+#            'GGSAVE',  # Saving / Investment / Tax / Government
+#            'GPSAVE',
+#            'PSAVERT',
+#            'A822RO1Q156NBEA',
+#            'B006RO1Q156NBEA',
+#            'W006RC1Q027SBEA',
+#            'GFDEGDQ188S',
+#            'A191RO1Q156NBEA',
+#            'A001RO1Q156NBEA',  # Total Perspective
+#            'CP',
+#            'INDPRO',
+#            'CSUSHPISA',
+#            'TCU',
+#            'GDPC1',
+#            'UNRATE',  # Misc
+#            #'VIXCLS'  # VINTAGE DATES OUT OF MAXIMUM ERROR
+#            'WILL5000PR',
+#            'DFF',  # Maturity / Rate  # VINTAGE DATES OUT OF MAXIMUM ERROR
+#            'DGS1',
+#            'DGS2',
+#            'DGS3',
+#            'DGS5',
+#            'DGS7',
+#            'DGS10',
+#            'DGS20',
+#            'DGS30',
+#            'DAAA',
+#            'DBAA',
+#            # libor 금리, 조회되지 않음
+#            # 'USD1MTD156N',
+#            # 'USD3MTD156N',
+#            # 'USD6MTD156N',
+#            # 'USD12MTD156N',
+#            # 고시 종료
+#            # 'TEDRATE',  # Spread
+#            # 'T3MFF',  # VINTAGE DATES OUT OF MAXIMUM ERROR
+#            # 'T6MFF',  # VINTAGE DATES OUT OF MAXIMUM ERROR
+#            # 'T1YFF',  # VINTAGE DATES OUT OF MAXIMUM ERROR
+#            # 'T5YFF',  # VINTAGE DATES OUT OF MAXIMUM ERROR
+#            # 'T10YFF',  # VINTAGE DATES OUT OF MAXIMUM ERROR
+#            # 'T10Y2Y',  # VINTAGE DATES OUT OF MAXIMUM ERROR
+#            # 'T10Y3M',  # VINTAGE DATES OUT OF MAXIMUM ERROR
+#            'AAAFF',
+#            'AAA10Y',
+#            'BAAFF',
+#            'BAA10Y',
+#            'BAMLH0A0HYM2'  # VINTAGE DATES OUT OF MAXIMUM ERROR
+#            ]
 
 # schema for table
+
 schema_meta = [bigquery.SchemaField("id", "STRING"),
                bigquery.SchemaField("realtime_start", "DATE"),
                bigquery.SchemaField("realtime_end", "DATE"),
@@ -146,7 +146,6 @@ for ticker in tickers:
     ticker_info_df_temp = pd.DataFrame(ticker_info).transpose()
 
     ticker_info_df = pd.DataFrame(ticker_info_df_temp, columns=column_names)
-    # ticker_info_df = pd.concat([ticker_info_df, pd.DataFrame(ticker_info_df_temp)])
 
     # GET Fred_series_info in DB
     sql = f"""
